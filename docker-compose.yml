@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  database:
+    image: mongo:3.6-xenial
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root+passwd
+    volumes:
+      - mongo_data:/data/db
+  
+  app:
+    build: .
+    image: carlospavanetti/totvs-fullstack-challenge
+    ports:
+      - 8888:8000
+
+volumes:
+  mongo_data:
