@@ -10,7 +10,7 @@ services:
       - mongo_data:/data/db
   
   app:
-    build: backend
+    build: .
     image: carlospavanetti/totvs-fullstack-challenge
     ports:
       - 8888:8000
