@@ -13,9 +13,9 @@ export default {
   data: function () {
     return {
       headers: [
-        { text: "Nome Completo", value: "name" },
-        { text: "Total Inadimplência", value: "totalDefault" },
-        { text: "Primeira Inadimplência", value: "firstDefaultDate" },
+        { text: "Nome do cliente", value: "name" },
+        { text: "Valor", value: "totalDefault" },
+        { text: "Desde", value: "firstDefaultDate" },
       ],
       clients: [
         {
