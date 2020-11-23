@@ -8,6 +8,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root+passwd
     volumes:
       - mongo_data:/data/db
+    ports:
+      - 27017:27017
   
   app:
     build:
@@ -20,6 +22,8 @@ services:
       MONGO_DATABASE: totvs-challenge
     ports:
       - 8888:8000
+    depends_on:
+      - database
 
 volumes:
   mongo_data:

@@ -8,9 +8,8 @@ async function connect() {
   await client.connect();
   const database = client.db(dbName);
   await database.command({ ping: 1 });
-  console.log("connected");
 
-  return database;
+  return { client, database: dbName };
 }
 
 export default connect();
