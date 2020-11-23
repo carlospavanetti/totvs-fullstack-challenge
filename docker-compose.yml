@@ -10,12 +10,14 @@ services:
       - mongo_data:/data/db
   
   app:
-    build: .
+    build:
+      context: .
+      args:
+        VUE_APP_ROOT_API: /api
     image: carlospavanetti/totvs-fullstack-challenge
     environment:
       MONGO_URL: mongodb://root:root+passwd@database:27017/?poolSize=20&w=majority
       MONGO_DATABASE: totvs-challenge
-      VUE_APP_ROOT_API: /api
     ports:
       - 8888:8000
 

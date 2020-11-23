@@ -20,6 +20,9 @@ RUN yarn install
 
 COPY frontend/ .
 
+ARG VUE_APP_ROOT_API
+ENV VUE_APP_ROOT_API "$VUE_APP_ROOT_API"
+
 RUN yarn build
 
 # LTS version
