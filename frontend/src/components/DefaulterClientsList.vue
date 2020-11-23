@@ -20,6 +20,9 @@
       <template v-slot:[`item.firstDefaultDate`]="{ item }">
         {{ item.firstDefaultDate | localizeDate }}
       </template>
+      <template v-slot:[`item.totalDefault`]="{ item }">
+        {{ item.totalDefault | currencyFromNumber }}
+      </template>
     </v-data-table>
   </v-card>
 </template>
@@ -38,6 +41,10 @@ export default {
     localizeDate(date) {
       if (!date) return;
       return new Date(date).toLocaleDateString("pt-br");
+    },
+
+    currencyFromNumber(number) {
+      return `R$ ${number.toFixed(2)}`;
     },
   },
   data() {
