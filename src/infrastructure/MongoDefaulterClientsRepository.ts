@@ -1,4 +1,3 @@
-import { Db } from "mongodb";
 import mongoConnection from "./MongoConnection";
 
 import {
@@ -8,13 +7,11 @@ import {
 
 export default class MongoDefaulterClientsRepository
   implements DefaulterClientsRepository {
-  connection: Promise<Db>;
-  constructor() {
-    this.connection = mongoConnection;
-  }
+  constructor(private connection = mongoConnection) {}
+
   async all(): Promise<DefaulterClient[]> {
-    const connection = await this.connection;
-    const collection = connection.collection("defaulter-clients");
+    const { client, database } = await this.connection;
+    const collection = client.db(database).collection("defaulter-clients");
     return collection
       .aggregate([
         {
@@ -27,5 +24,16 @@ export default class MongoDefaulterClientsRepository
         },
       ])
       .toArray();
+  }
+
+  async insert(document) {
+    const { client, database } = await this.connection;
+    const collection = client.db(database).collection("defaulter-clients");
+    return collection.insertOne(document);
+  }
+
+  async close() {
+    const { client } = await this.connection;
+    client.close();
   }
 }
