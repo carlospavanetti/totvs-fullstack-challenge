@@ -12,7 +12,7 @@ export class DefaulterClient {
   name: string;
   defaults: Default[] = [];
   firstDefaultDate!: Date;
-  totalDefaults: number = 0;
+  totalDefault: number = 0;
 
   constructor(names: string) {
     this.name = names;

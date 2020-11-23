@@ -21,7 +21,7 @@ export default class MongoDefaulterClientsRepository
           $project: {
             name: 1,
             defaults: 1,
-            totalDefaults: { $sum: "$defaults.value" },
+            totalDefault: { $sum: "$defaults.value" },
             firstDefaultDate: { $min: "$defaults.date" },
           },
         },

@@ -21,9 +21,16 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "DefaulterClientsList",
-  data: function () {
+  mounted() {
+    axios
+      .get(`${process.env.VUE_APP_ROOT_API}/defaulters`)
+      .then((response) => (this.clients = response.data));
+  },
+  data() {
     return {
       query: "",
       headers: [
@@ -31,28 +38,7 @@ export default {
         { text: "Valor", value: "totalDefault" },
         { text: "Desde", value: "firstDefaultDate" },
       ],
-      clients: [
-        {
-          name: "Carlos Prado 1",
-          totalDefault: 159,
-          firstDefaultDate: new Date(),
-        },
-        {
-          name: "Carlos Prado 2",
-          totalDefault: 237,
-          firstDefaultDate: new Date(),
-        },
-        {
-          name: "Carlos Prado 3",
-          totalDefault: 262,
-          firstDefaultDate: new Date(),
-        },
-        {
-          name: "Carlos Prado 4",
-          totalDefault: 305,
-          firstDefaultDate: new Date(),
-        },
-      ],
+      clients: [],
     };
   },
 };
