@@ -16,7 +16,11 @@
       :items="clients"
       :items-per-page="5"
       :search="query"
-    ></v-data-table>
+    >
+      <template v-slot:[`item.firstDefaultDate`]="{ item }">
+        {{ item.firstDefaultDate | localizeDate }}
+      </template>
+    </v-data-table>
   </v-card>
 </template>
 
@@ -29,6 +33,12 @@ export default {
     axios
       .get(`${process.env.VUE_APP_ROOT_API}/defaulters`)
       .then((response) => (this.clients = response.data));
+  },
+  filters: {
+    localizeDate(date) {
+      if (!date) return;
+      return new Date(date).toLocaleDateString("pt-br");
+    },
   },
   data() {
     return {
